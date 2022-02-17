@@ -1,0 +1,14 @@
+{
+    "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-etc"],
+    "jsRules": {},
+    "rules": {
+        "no-empty-interface": false,
+        "no-console": false,
+        "interface-name": false,
+        "jsx-no-lambda": false,
+        "no-shadowed-variable": true,
+        "object-literal-sort-keys": false,
+        "no-unused-declaration": true,
+        "quotemark": [true, "single", "jsx-double", "avoid-escape"]
+    }
+}

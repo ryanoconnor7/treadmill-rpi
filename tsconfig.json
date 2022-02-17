@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "allowSyntheticDefaultImports": true,
+        "lib": ["dom"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "skipLibCheck": true
+    }
+}
