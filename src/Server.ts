@@ -1,6 +1,8 @@
 import * as express from 'express'
 import * as otc from './otc'
 import { initializeApp } from 'firebase/app'
+import { Controller } from './Controller'
+import { getDatabase } from '@firebase/database'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyDZzNWJzu5mPDo_CHEfcJzJp9ofSe4LmgE',
@@ -12,7 +14,8 @@ const firebaseConfig = {
     measurementId: 'G-RLT8BVJEH6'
 }
 
-const fbApp = initializeApp(firebaseConfig)
+export const fbApp = initializeApp(firebaseConfig)
+export const db = getDatabase(fbApp)
 
 const app = express()
 const port = 3000
@@ -23,8 +26,11 @@ app.get('/status', async (req, res) => {
 
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`))
 
-otc.connect()
-    .then()
-    .catch(e => {
-        console.log('Not connected')
-    })
+// otc.connect()
+//     .then()
+//     .catch(e => {
+//         console.log('Not connected')
+//     })
+
+let c = new Controller()
+c.start('demo', 0)
