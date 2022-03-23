@@ -18,21 +18,27 @@ export class Controller {
 
         const settingsRef = ref(db, `settings`)
 
-        onValue(settingsRef, async snapshot => {
-            clearInterval(this.updateUnsub)
-            const settings = snapshot.val()
-            console.log('SETTINGS:', settings)
-            this.updateInterval = settings.update_spacing
-            this.oldestUpdate = settings.oldest_update
+        onValue(
+            settingsRef,
+            async snapshot => {
+                clearInterval(this.updateUnsub)
+                const settings = snapshot.val()
+                console.log('SETTINGS:', settings)
+                this.updateInterval = settings.update_spacing
+                this.oldestUpdate = settings.oldest_update
 
-            const cameraRef = ref(db, `locations/${this.locationID}/cameras/${this.cameraID}`)
-            // const updatesRef = ref(db, `locations/${this.locationID}/cameras/${this.cameraID}/updates`)
-            const unsubscribe = onValue(cameraRef, async snapshot => {
-                unsubscribe()
-                this.camera = snapshot.val()
-                this.updateUnsub = setInterval(this.getThermalData, settings.update_freq)
-            })
-        })
+                const cameraRef = ref(db, `locations/${this.locationID}/cameras/${this.cameraID}`)
+                // const updatesRef = ref(db, `locations/${this.locationID}/cameras/${this.cameraID}/updates`)
+                const unsubscribe = onValue(cameraRef, async snapshot => {
+                    unsubscribe()
+                    this.camera = snapshot.val()
+                    this.updateUnsub = setInterval(this.getThermalData, settings.update_freq)
+                })
+            },
+            onError => {
+                setTimeout(this.start, 10000)
+            }
+        )
     }
 
     getThermalData = async () => {
