@@ -1,5 +1,4 @@
 import * as express from 'express'
-import * as otc from './otc'
 import { initializeApp } from 'firebase/app'
 import { Controller } from './Controller'
 import { getDatabase } from '@firebase/database'
