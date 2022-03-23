@@ -3,6 +3,11 @@ export interface Update {
     timestamp: number
 }
 
+export interface Unit {
+    bbox: string
+    type: string
+}
+
 export interface Camera {
     description: string
     units: Unit[]
