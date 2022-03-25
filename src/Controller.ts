@@ -44,9 +44,9 @@ export class Controller {
 
     getThermalData = async () => {
         try {
-            const result = await sh('bash ~/thermal-scripts/test.sh')
+            // const result = await sh('bash ~/thermal-scripts/test.sh')
 
-            // const result = await sh('bash /home/pi/thermal-scripts/test.sh')
+            const result = await sh('bash /home/pi/thermal-scripts/test.sh')
             const parsedState = this.parseState(result.stdout)
             const stringRep = this.parsedStateToString(parsedState)
             console.log('Parsed state:', parsedState)
