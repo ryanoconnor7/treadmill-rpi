@@ -1,5 +1,5 @@
 import { onValue, ref, set, update } from '@firebase/database'
-import _ from 'lodash'
+import * as _ from 'lodash'
 import { db } from './Server'
 import { Camera, Update } from './utilities/Firebase'
 import { sh } from './utilities/MiscUtils'
@@ -44,7 +44,9 @@ export class Controller {
 
     getThermalData = async () => {
         try {
-            const result = await sh('bash /home/pi/thermal-scripts/test.sh')
+            const result = await sh('bash ~/thermal-scripts/test.sh')
+
+            // const result = await sh('bash /home/pi/thermal-scripts/test.sh')
             const parsedState = this.parseState(result.stdout)
             const stringRep = this.parsedStateToString(parsedState)
             console.log('Parsed state:', parsedState)
@@ -100,7 +102,7 @@ export class Controller {
             }
             if (update.timestamp > now - this.updateInterval - (now % this.updateInterval)) {
                 // console.log('Adding 1 RT update')
-                newUpdates.push(update)
+                if (update) newUpdates.push(update)
             } else if (
                 newUpdates.length > 0 &&
                 newUpdates[newUpdates.length - 1].timestamp - update.timestamp > this.updateInterval
@@ -109,13 +111,13 @@ export class Controller {
                     'Adding update with min difference:',
                     (camera.updates[i - 1].timestamp - update.timestamp) / 60 / 1000
                 )
-                newUpdates.push(update)
+                if (update) newUpdates.push(update)
             } else {
                 console.log('1 skipped update', now, update.timestamp)
             }
         })
 
-        camera.updates = _.compact(newUpdates)
+        camera.updates = newUpdates
         camera.updates.reverse()
 
         const updates = {}
