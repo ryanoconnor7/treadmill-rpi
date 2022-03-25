@@ -4,13 +4,14 @@ import { Controller } from './Controller'
 import { getDatabase } from '@firebase/database'
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyDZzNWJzu5mPDo_CHEfcJzJp9ofSe4LmgE',
-    authDomain: 'treadmill-4d65b.firebaseapp.com',
-    projectId: 'treadmill-4d65b',
-    storageBucket: 'treadmill-4d65b.appspot.com',
-    messagingSenderId: '405014925553',
-    appId: '1:405014925553:web:b8930c510a51b4355c1950',
-    measurementId: 'G-RLT8BVJEH6'
+    apiKey: 'AIzaSyALTboEJgohraJw0pj1bACrvBZkDdb_7Eg',
+    authDomain: 'treadmill-2.firebaseapp.com',
+    databaseURL: 'https://treadmill-2-default-rtdb.firebaseio.com',
+    projectId: 'treadmill-2',
+    storageBucket: 'treadmill-2.appspot.com',
+    messagingSenderId: '987750487745',
+    appId: '1:987750487745:web:a39a8327465dffb30c6640',
+    measurementId: 'G-ECNJ6R7D5G'
 }
 
 export const fbApp = initializeApp(firebaseConfig)

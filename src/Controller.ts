@@ -1,4 +1,5 @@
 import { onValue, ref, set, update } from '@firebase/database'
+import _ from 'lodash'
 import { db } from './Server'
 import { Camera, Update } from './utilities/Firebase'
 import { sh } from './utilities/MiscUtils'
@@ -114,7 +115,7 @@ export class Controller {
             }
         })
 
-        camera.updates = newUpdates
+        camera.updates = _.compact(newUpdates)
         camera.updates.reverse()
 
         const updates = {}
